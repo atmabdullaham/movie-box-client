@@ -6,7 +6,7 @@ import Card from "../components/Card";
 const Home = () => {
   const moviesData = useLoaderData();
   const [movies, setMovies] = useState([]);
-  console.log(moviesData);
+
   useEffect(() => {
     if (moviesData) {
       const sortedMovies = [...moviesData].sort((a, b) => b.rating - a.rating);

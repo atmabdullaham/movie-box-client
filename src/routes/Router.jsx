@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import AddMovie from "../pages/AddMovie";
 import FavoriteMovies from "../pages/FavoriteMovies";
 import AllMovie from "../pages/AllMovie";
+import Details from "../pages/Details";
+import MovieDetails from "../pages/MovieDetails";
 
 const routes = createBrowserRouter([
   {
@@ -19,6 +21,12 @@ const routes = createBrowserRouter([
         path: "/all-movies",
         element: <AllMovie></AllMovie>,
         loader: () => fetch("http://localhost:5000/movie"),
+      },
+      {
+        path: "/movie/:id",
+        element: <MovieDetails></MovieDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/movie/${params.id}`),
       },
       {
         path: "/add-movie",

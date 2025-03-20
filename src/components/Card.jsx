@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Card = ({ movie }) => {
-  const { poster, title, genre, duration, releaseYear, rating, summary } =
+  const { _id, poster, title, genre, duration, releaseYear, rating, summary } =
     movie;
-  console.log(movie);
+
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <figure>
@@ -21,6 +22,11 @@ const Card = ({ movie }) => {
         <div className="card-actions justify-end">
           <div className="badge badge-outline">{rating}</div>
           <div className="badge badge-outline">Products</div>
+        </div>
+        <div className="card-actions mt-4 text-center">
+          <NavLink to={`/movie/${_id}`} className="btn ">
+            Movie Details
+          </NavLink>
         </div>
       </div>
     </div>
