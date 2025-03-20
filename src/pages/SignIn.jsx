@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
   const { handleLogin, handleGoogleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const SignIn = () => {
   const googleLoginHandler = () => {
     handleGoogleLogin().then((res) => {
       toast.success(`Successfully login`);
+      navigate("/");
     });
   };
   return (

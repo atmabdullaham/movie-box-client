@@ -1,12 +1,15 @@
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import toast, { Toaster } from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -35,6 +38,27 @@ const AuthProvider = ({ children }) => {
   const handleGoogleLogin = () => {
     return signInWithPopup(auth, googleProvider);
   };
+  // logout
+  const handleLogout = () => {
+    return signOut(auth)
+      .then(() => {
+        toast.success(`${user.displayName}'s Logout Successful`);
+      })
+      .catch((error) => {});
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+      return () => {
+        unsubscribe();
+      };
+    });
+  }, []);
   const authInfo = {
     user,
     loading,
@@ -42,9 +66,13 @@ const AuthProvider = ({ children }) => {
     manageProfile,
     handleLogin,
     handleGoogleLogin,
+    handleLogout,
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <div>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+      <Toaster></Toaster>
+    </div>
   );
 };
 
