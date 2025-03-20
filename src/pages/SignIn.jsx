@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, handleGoogleLogin } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +24,15 @@ const SignIn = () => {
         console.log(errorCode, errorMessage);
       });
   };
+  const googleLoginHandler = () => {
+    handleGoogleLogin().then((res) => {
+      toast.success(`Successfully login`);
+    });
+  };
   return (
     <div className="hero bg-base-200 min-h-[calc(100vh-100px)]">
       <div className="hero-content w-4/12 ">
+        <Toaster></Toaster>
         <div className="card bg-base-100  w-full  shadow-2xl">
           <div className="card-body">
             <h1 className="text-3xl font-bold">Sign In</h1>
@@ -52,7 +59,9 @@ const SignIn = () => {
             </form>
             <div className="divider">OR</div>
 
-            <button className="btn">Continue With Google</button>
+            <button className="btn" onClick={googleLoginHandler}>
+              Continue With Google
+            </button>
             <div>
               <h2>
                 New to MovieBox?{" "}

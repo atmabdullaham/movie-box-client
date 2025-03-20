@@ -4,7 +4,8 @@ import { AuthContext } from "../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
-  const { handleRegister, manageProfile } = useContext(AuthContext);
+  const { handleRegister, manageProfile, handleGoogleLogin } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +41,11 @@ const SignUp = () => {
         console.log(errorCode, errorMessage);
         // ..
       });
+  };
+  const googleLoginHandler = () => {
+    handleGoogleLogin().then((res) => {
+      toast.success(`Successfully login`);
+    });
   };
   return (
     <div className="hero bg-base-200 min-h-[calc(100vh-100px)]">
@@ -81,7 +87,9 @@ const SignUp = () => {
               <input className="btn" type="submit" value="Sign Up" />
             </form>
             <div className="divider">OR</div>
-            <button className="btn">Continue With Google</button>
+            <button className="btn" onClick={googleLoginHandler}>
+              Continue With Google
+            </button>
             <div>
               <h2>
                 Already have and account?
