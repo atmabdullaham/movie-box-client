@@ -6,6 +6,8 @@ import FavoriteMovies from "../pages/FavoriteMovies";
 import AllMovie from "../pages/AllMovie";
 import Details from "../pages/Details";
 import MovieDetails from "../pages/MovieDetails";
+import SignUp from "../pages/SignUp";
+import SignIn from "../pages/SignIn";
 
 const routes = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const routes = createBrowserRouter([
       {
         path: "/favorite",
         element: <FavoriteMovies></FavoriteMovies>,
+      },
+      {
+        path: "/SignUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/SignIn",
+        element: <SignIn></SignIn>,
       },
     ],
   },
