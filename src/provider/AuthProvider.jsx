@@ -15,9 +15,11 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log(loading, user);
 
   //
   const handleRegister = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   //
@@ -30,16 +32,19 @@ const AuthProvider = ({ children }) => {
 
   //
   const handleLogin = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //google login
   const googleProvider = new GoogleAuthProvider();
   const handleGoogleLogin = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   // logout
   const handleLogout = () => {
+    setLoading(true);
     return signOut(auth)
       .then(() => {
         toast.success(`${user.displayName}'s Logout Successful`);
@@ -50,10 +55,11 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
-      setLoading(false);
       return () => {
         unsubscribe();
       };
@@ -67,6 +73,7 @@ const AuthProvider = ({ children }) => {
     handleLogin,
     handleGoogleLogin,
     handleLogout,
+    setUser,
   };
   return (
     <div>

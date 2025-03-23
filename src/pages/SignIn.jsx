@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
-  const { handleLogin, handleGoogleLogin } = useContext(AuthContext);
+  const { handleLogin, handleGoogleLogin, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +18,8 @@ const SignIn = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+        setUser(user);
+        navigate(location?.state ? location.state : "/");
         // ...
       })
       .catch((error) => {
@@ -26,9 +29,11 @@ const SignIn = () => {
       });
   };
   const googleLoginHandler = () => {
-    handleGoogleLogin().then((res) => {
+    handleGoogleLogin().then((userCredential) => {
+      const user = userCredential.user;
+      setUser(user);
       toast.success(`Successfully login`);
-      navigate("/");
+      navigate(location?.state ? location.state : "/");
     });
   };
   return (
