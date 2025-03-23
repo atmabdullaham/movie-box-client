@@ -7,6 +7,7 @@ import AllMovie from "../pages/AllMovie";
 import MovieDetails from "../pages/MovieDetails";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -25,17 +26,29 @@ const routes = createBrowserRouter([
       },
       {
         path: "/movie/:id",
-        element: <MovieDetails></MovieDetails>,
+        element: (
+          <PrivateRoute>
+            <MovieDetails></MovieDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/movie/${params.id}`),
       },
       {
         path: "/add-movie",
-        element: <AddMovie></AddMovie>,
+        element: (
+          <PrivateRoute>
+            <AddMovie></AddMovie>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/favorite/:email",
-        element: <FavoriteMovies></FavoriteMovies>,
+        element: (
+          <PrivateRoute>
+            <FavoriteMovies></FavoriteMovies>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/favorite/${params.email}`),
       },
