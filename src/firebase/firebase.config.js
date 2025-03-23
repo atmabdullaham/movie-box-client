@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
- apiKey: "AIzaSyBtaJH6rOu_MX_2rpGjfKi4gznTqqMnZkY",
- authDomain: "movie-box-fba8e.firebaseapp.com",
- projectId: "movie-box-fba8e",
- storageBucket: "movie-box-fba8e.firebasestorage.app",
- messagingSenderId: "115847471805",
- appId: "1:115847471805:web:b53ed420fffb9f0b804dd4"
+ apiKey: import.meta.env.VITE_apikey,
+ authDomain: import.meta.env.VITE_authDomain,
+ projectId: import.meta.env.VITE_projectId,
+ storageBucket: import.meta.env.VITE_storageBucket,
+ messagingSenderId: import.meta.env.VITE_messagingSenderId,
+ appId: import.meta.env.VITE_appId
 };
 // Import the functions you need from the SDKs you need
 

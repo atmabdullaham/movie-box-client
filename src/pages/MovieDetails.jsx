@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MovieDetails = () => {
+  console.log(import.meta.env.VITE_apikey);
   const navigate = useNavigate();
   const movie = useLoaderData();
   console.log(movie);
