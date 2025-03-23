@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 import AddMovie from "../pages/AddMovie";
 import FavoriteMovies from "../pages/FavoriteMovies";
 import AllMovie from "../pages/AllMovie";
-import Details from "../pages/Details";
+
 import MovieDetails from "../pages/MovieDetails";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
