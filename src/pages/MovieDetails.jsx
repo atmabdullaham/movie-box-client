@@ -1,11 +1,38 @@
+import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
 const MovieDetails = () => {
-  console.log(import.meta.env.VITE_apikey);
   const navigate = useNavigate();
   const movie = useLoaderData();
+  const user = useContext(AuthContext);
+  const { _id, ...fMovie } = movie;
+
   console.log(movie);
+  const handleFavorite = (fMovie, user) => {
+    const email = user.user.email;
+    const fMovieWithEmail = { ...fMovie, email };
+    console.log(fMovieWithEmail);
+    //
+    fetch("http://localhost:5000/favorite", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(fMovieWithEmail),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Movie successfully added",
+            icon: "success",
+          });
+        }
+      });
+  };
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -51,7 +78,14 @@ const MovieDetails = () => {
           >
             Delete Movie
           </button>
-          <button className="btn btn-primary">Add to Favorite</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              handleFavorite(fMovie, user);
+            }}
+          >
+            Add to Favorite
+          </button>
         </div>
       </div>
     </div>

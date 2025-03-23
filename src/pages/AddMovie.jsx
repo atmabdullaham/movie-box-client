@@ -11,6 +11,7 @@ const AddMovie = () => {
     const releaseYear = form.releaseYear.value;
     const rating = form.rating.value;
     const summary = form.summary.value;
+
     const newMovie = {
       poster,
       title,
