@@ -4,6 +4,8 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
   const { user, handleLogout } = useContext(AuthContext);
+  const email = user?.email;
+  console.log(user);
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -38,7 +40,7 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/all-movies">All Movies</NavLink>
           <NavLink to="/add-movie">Add Movie</NavLink>
-          <NavLink to="/favorite">My Favorites</NavLink>
+          <NavLink to={`/favorite/${email}`}>My Favorites</NavLink>
           <NavLink>One Extra</NavLink>
         </ul>
       </div>

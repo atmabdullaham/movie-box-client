@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 import AddMovie from "../pages/AddMovie";
 import FavoriteMovies from "../pages/FavoriteMovies";
 import AllMovie from "../pages/AllMovie";
-
 import MovieDetails from "../pages/MovieDetails";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
@@ -35,8 +34,10 @@ const routes = createBrowserRouter([
         element: <AddMovie></AddMovie>,
       },
       {
-        path: "/favorite",
+        path: "/favorite/:email",
         element: <FavoriteMovies></FavoriteMovies>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/favorite/${params.email}`),
       },
       {
         path: "/SignUp",
