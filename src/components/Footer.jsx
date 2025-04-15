@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer sm:footer-horizontal bg-base-200 text-base-content p-10">
+    <div className="">
+      <footer className="footer sm:footer-horizontal  text-white p-10 bg-gray-900">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
@@ -23,14 +23,14 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </nav>
       </footer>
-      <footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
+      <footer className="footer  text-white  px-10 py-4 bg-gray-900">
         <aside className="grid-flow-col items-center">
           <p>
             Movie Box
             <br />A reliable movie portal since 2020
           </p>
         </aside>
-        <nav className="md:place-self-center md:justify-self-end">
+        <nav className="md:place-self-center md:justify-self-end ">
           <div className="grid grid-flow-col gap-4">
             <a>
               <svg

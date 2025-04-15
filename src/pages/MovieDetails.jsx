@@ -64,7 +64,7 @@ const MovieDetails = () => {
     });
   };
   return (
-    <div className="card lg:card-side bg-base-100 shadow-sm">
+    <div className="card lg:card-side bg-base-100 shadow-sm mt-20">
       <figure>
         <img src={movie.poster} alt="Album" />
       </figure>

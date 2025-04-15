@@ -8,7 +8,7 @@ const Navbar = () => {
   console.log(user);
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-gray-800 shadow-sm text-base-100 px-8 fixed z-50 font-winky font-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,10 +33,15 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           ></ul>
         </div>
-        <a className="btn btn-ghost text-xl">Movie Box</a>
+        <a className="btn bg-transparent border-none text-white shadow-none text-xl ">
+          <span className="bg-yellow-300 text-black px-2 rounded-md">
+            Movie
+          </span>{" "}
+          Box
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-8">
+        <ul className="menu menu-horizontal px-1 gap-8 font-medium text-md">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/all-movies">All Movies</NavLink>
           <NavLink to="/add-movie">Add Movie</NavLink>
@@ -52,17 +57,26 @@ const Navbar = () => {
             </div>
 
             <ul>
-              <NavLink onClick={handleLogout} className="btn">
+              <NavLink
+                onClick={handleLogout}
+                className="btn bg-yellow-300 border-0 px-2 rounded-md"
+              >
                 Logout
               </NavLink>
             </ul>
           </div>
         ) : (
-          <ul>
-            <NavLink className="btn" to="/SignIn">
+          <ul className="space-x-1">
+            <NavLink
+              className="btn bg-yellow-300 border-0 px-2 rounded-md"
+              to="/SignIn"
+            >
               Login
             </NavLink>
-            <NavLink className="btn" to="/SignUp">
+            <NavLink
+              className="btn bg-yellow-300 border-0 px-2 rounded-md"
+              to="/SignUp"
+            >
               Register
             </NavLink>
           </ul>

@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const AddMovie = () => {
@@ -12,6 +13,22 @@ const AddMovie = () => {
     const rating = form.rating.value;
     const summary = form.summary.value;
 
+    if (!/^https?:\/\/.+/.test(poster)) {
+      toast.error("Invalid poster URL");
+      return;
+    }
+    if (title.trim().length < 2) {
+      toast.error("Title must be at least 2 characters");
+      return;
+    }
+    if (!duration || duration < 60) {
+      toast.error("Duration must be at least 60 minutes");
+      return;
+    }
+    if (summary.trim().length < 10) {
+      toast.error("Summary must be at least 10 characters");
+      return;
+    }
     const newMovie = {
       poster,
       title,
@@ -42,7 +59,7 @@ const AddMovie = () => {
       });
   };
   return (
-    <div className="max-w-xl mx-auto bg-base-100 shadow-lg rounded-lg p-6">
+    <div className="max-w-xl mx-auto bg-base-100 shadow-lg rounded-lg p-6 mt-20">
       <h2 className="text-2xl font-bold mb-4 text-center"> Add New Movie</h2>
       <form onSubmit={handleAddMovie} className="space-y-4">
         <input
@@ -59,13 +76,30 @@ const AddMovie = () => {
           className="input input-bordered w-full"
           required
         />
-        <input
-          type="text"
+
+        <select
+          defaultValue="Pick a color"
+          className="select w-full"
           name="genre"
-          placeholder="Genres (comma separated)"
-          className="input input-bordered w-full"
-          required
-        />
+        >
+          <option disabled={true}>Choose Genre</option>
+          <option>Animation</option>
+          <option>Biography</option>
+          <option>Documentary</option>
+          <option>Fantasy</option>
+          <option>Musical</option>
+          <option>Mystery</option>
+          <option>Romance</option>
+          <option>Science Fiction</option>
+          <option>Sports</option>
+          <option>War</option>
+          <option>Western</option>
+          <option>Crime</option>
+          <option>Family</option>
+          <option>Historical</option>
+          <option>Superhero</option>
+        </select>
+
         <input
           type="number"
           name="duration"
@@ -73,13 +107,38 @@ const AddMovie = () => {
           className="input input-bordered w-full"
           required
         />
-        <input
-          type="number"
+        <select
+          defaultValue="Pick a color"
+          className="select w-full"
           name="releaseYear"
-          placeholder="Release Year"
-          className="input input-bordered w-full"
-          required
-        />
+        >
+          <option disabled={true}>Select Year</option>
+          <option>2001</option>
+          <option>2002</option>
+          <option>2003</option>
+          <option>2004</option>
+          <option>2005</option>
+          <option>2006</option>
+          <option>2007</option>
+          <option>2008</option>
+          <option>2009</option>
+          <option>2010</option>
+          <option>2011</option>
+          <option>2012</option>
+          <option>2013</option>
+          <option>2014</option>
+          <option>2015</option>
+          <option>2016</option>
+          <option>2017</option>
+          <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
         <input
           type="text"
           name="rating"
@@ -87,6 +146,7 @@ const AddMovie = () => {
           className="input input-bordered w-full"
           required
         />
+
         <textarea
           name="summary"
           placeholder="Movie Summary"
