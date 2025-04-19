@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import ClassicMovies from "../components/ClassicMovies";
 import AwardWinningFilms from "../components/AwardWinningFilms";
 
+
 const Home = () => {
   const moviesData = useLoaderData();
   const [movies, setMovies] = useState([]);
@@ -15,6 +16,7 @@ const Home = () => {
       setMovies(sortedMovies);
     }
   }, [moviesData]);
+  
 
   return (
     <div className="mt-20">

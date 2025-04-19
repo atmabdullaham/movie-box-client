@@ -1,7 +1,14 @@
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Rating } from 'react-simple-star-rating'
+import { useState } from "react";
 
 const AddMovie = () => {
+  const [rating, setRating] = useState(0);
+  const handleRating = (rate) => {
+    console.log(rate);
+    setRating(rate);
+  };
   const handleAddMovie = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -10,7 +17,7 @@ const AddMovie = () => {
     const genre = form.genre.value;
     const duration = form.duration.value;
     const releaseYear = form.releaseYear.value;
-    const rating = form.rating.value;
+   
     const summary = form.summary.value;
 
     if (!/^https?:\/\/.+/.test(poster)) {
@@ -23,6 +30,10 @@ const AddMovie = () => {
     }
     if (!duration || duration < 60) {
       toast.error("Duration must be at least 60 minutes");
+      return;
+    }
+    if(rating === 0) {
+      toast.error("Please select a rating");
       return;
     }
     if (summary.trim().length < 10) {
@@ -139,13 +150,23 @@ const AddMovie = () => {
           <option>2024</option>
           <option>2025</option>
         </select>
-        <input
-          type="text"
-          name="rating"
-          placeholder="Rating (1-10)"
-          className="input input-bordered w-full"
-          required
-        />
+        <div>
+  <Rating
+    onClick={handleRating}
+    SVGstyle={{ display: 'inline-block' }}
+    size={30}
+    allowHover
+    transition
+    fillColor="gold"
+    emptyColor="#ccc"
+    required={true}
+    showTooltip={true}
+    allowFraction={true}
+    initialValue={rating}
+    iconsCount={10}
+  
+  />
+</div>
 
         <textarea
           name="summary"
