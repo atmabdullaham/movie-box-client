@@ -8,11 +8,14 @@ import MovieDetails from "../pages/MovieDetails";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import PrivateRoute from "./PrivateRoute";
+import Error from "../pages/Error";
+import Update from "../pages/Update";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -60,6 +63,12 @@ const routes = createBrowserRouter([
         path: "/SignIn",
         element: <SignIn></SignIn>,
       },
+      {
+        path:"/update/:id",
+        element:<Update></Update>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/update/${params.id}`),
+      }
     ],
   },
 ]);

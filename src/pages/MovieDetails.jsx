@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 
@@ -86,6 +86,7 @@ const MovieDetails = () => {
           >
             Add to Favorite
           </button>
+         <NavLink to={`/update/${movie._id}`} className="btn" >Update</NavLink>
         </div>
       </div>
     </div>
