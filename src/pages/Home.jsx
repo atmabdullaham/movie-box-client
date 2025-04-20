@@ -23,7 +23,7 @@ const Home = () => {
       {/* Banner */}
       <Banner></Banner>
       {/* Featured */}
-      <h1 className="text-yellow-300 font-bold font-winky text-2xl pt-2">
+      <h1 className="text-yellow-300 font-bold font-winky text-4xl pt-6">
         Featured Movies
       </h1>
       <div className="grid grid-cols-3 gap-3 my-4">

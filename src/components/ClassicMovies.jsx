@@ -2,8 +2,8 @@ import React from "react";
 
 const ClassicMovies = () => {
   return (
-    <div >
-      <h1 className="text-yellow-300 font-bold font-winky text-2xl pt-2">
+    <div className="mt-20  bg-gray-800 rounded-lg shadow-lg mb-20">
+      <h1 className="text-yellow-300 font-bold font-winky text-4xl p-6">
         Classic Movies
       </h1>
       <div className="text-gray-300 lg:w-3/4 mx-auto mt-10 mb-20">
