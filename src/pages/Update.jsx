@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Update = () => {
   const loadedData = useLoaderData()
-  console.log(loadedData);
+  // console.log(loadedData);
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       poster: loadedData.poster,
@@ -25,7 +25,7 @@ const Update = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    
     if (rating === 0) {
       toast.error("Please select a rating");
       return;
@@ -47,11 +47,13 @@ console.log(updateMovie);
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        console.log(data);
+        if (data.modifiedCount > 0) {
           Swal.fire({
-            title: "Movie successfully added",
+            title: "Movie successfully updated",
             icon: "success",
           });
+        
         }
       });
   };
