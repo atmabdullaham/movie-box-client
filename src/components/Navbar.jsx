@@ -1,15 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+
 
 const Navbar = () => {
   const { user, handleLogout } = useContext(AuthContext);
   const email = user?.email;
   console.log(user);
+  const [hidden, setHidden] = useState(true);
+
+  const handleMouseEnter = () => {
+    setHidden(false); // show name, hide image
+  };
+
+  const handleMouseLeave = () => {
+    setHidden(true); // show image, hide name
+  };
+ 
 
   return (
     <div className="navbar bg-gray-800 shadow-sm text-base-100 px-8 fixed z-50 font-winky font-lg">
-      <div className="navbar-start">
+      <div className="navbar-start  flex md:justify-between lg:justify-start" >
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -30,15 +41,22 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          ></ul>
+            className="menu menu-sm dropdown-content bg-gray-700 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/all-movies">All Movies</NavLink>
+          <NavLink to="/add-movie">Add Movie</NavLink>
+          <NavLink to={`/favorite/${email}`}>My Favorites</NavLink>
+          <NavLink to="/news">News</NavLink>
+          </ul>
         </div>
-        <a className="btn bg-transparent border-none text-white shadow-none text-xl ">
+        <NavLink 
+        to="/" className="btn hidden bg-transparent  text-white shadow-none md:block text-xl pt-1 border-none ">
           <span className="bg-yellow-300 text-black px-2 rounded-md">
             Movie
           </span>{" "}
           Box
-        </a>
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-8 font-medium text-md">
@@ -46,14 +64,20 @@ const Navbar = () => {
           <NavLink to="/all-movies">All Movies</NavLink>
           <NavLink to="/add-movie">Add Movie</NavLink>
           <NavLink to={`/favorite/${email}`}>My Favorites</NavLink>
-          <NavLink>One Extra</NavLink>
+          <NavLink to="/news">News</NavLink>
         </ul>
       </div>
       <div className="navbar-end">
         {user?.email ? (
-          <div>
-            <div>
-              <button>{user.displayName}</button>
+          <div className="flex items-center gap-2">
+            <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+              <button className={ hidden ? "hidden" : "flex items-center gap-2"}>{user.displayName}</button>
+              <img 
+              
+              className={`w-10 h-10 rounded-full ${hidden ? "" : "hidden"}`}
+                src={user.photoURL}
+                alt=""
+              />
             </div>
 
             <ul>

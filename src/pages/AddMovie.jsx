@@ -51,7 +51,7 @@ const AddMovie = () => {
     };
     console.log(newMovie);
 
-    fetch("http://localhost:5000/movie", {
+    fetch("https://movie-box-server.vercel.app/movie", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -174,7 +174,7 @@ const AddMovie = () => {
           className="textarea textarea-bordered w-full"
           required
         ></textarea>
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className="btn  bg-transparent   rounded-2xl border-0 border-b-2 border-yellow-300  hover:text-blue-100 text-lg text-gray-900 hover:bg-gray-800 shadow-none hover:border-0 w-full">
           Add Movie
         </button>
       </form>

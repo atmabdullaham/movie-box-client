@@ -7,8 +7,8 @@ const Error = () => {
       <h1 className="text-7xl font-extrabold mb-4">404</h1>
       <h2 className="text-2xl font-semibold mb-2">Page Not Found</h2>
       <p className="mb-6 text-gray-400 max-w-md">
-        Oops! The page you're looking for has vanished into the cinematic void.
-        Let’s guide you back to the spotlight.
+        Oops! The page you are looking for does not exist. It might have been removed, or the URL might be incorrect.
+        Please check the URL or return to the homepage.
       </p>
       <Link
         to="/"

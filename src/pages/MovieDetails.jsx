@@ -9,13 +9,18 @@ const MovieDetails = () => {
   const user = useContext(AuthContext);
   const { _id, ...fMovie } = movie;
 
+  const { poster, title, genre, duration, releaseYear, rating, summary} = movie;
+  const durationInHours = Math.floor(duration / 60);  
+  const remainingMinutes = duration % 60;
+    
+
   console.log(movie);
   const handleFavorite = (fMovie, user) => {
     const email = user.user.email;
     const fMovieWithEmail = { ...fMovie, email };
     console.log(fMovieWithEmail);
     //
-    fetch("http://localhost:5000/favorite", {
+    fetch("https://movie-box-server.vercel.app/favorite", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -45,7 +50,7 @@ const MovieDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         console.log("delete confirm", id);
-        fetch(`http://localhost:5000/movie/${id}`, {
+        fetch(`https://movie-box-server.vercel.app/movie/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -65,28 +70,60 @@ const MovieDetails = () => {
   };
   return (
     <div className="card lg:card-side bg-base-100 shadow-sm mt-20">
-      <figure>
+      <figure className="lg:w-1/2 relative ">  
         <img src={movie.poster} alt="Album" />
+        <div className="bg-gray-900 text-white absolute lg:hidden justify-start  p-1 rounded-xl flex items-center bottom-2 right-2" >
+        <img className="w-6 h-6" src="https://img.icons8.com/?size=100&id=LoSoc46PxwP6&format=png&color=000000" alt="" />
+        <div className="font-winky">{`${durationInHours} ${durationInHours >1 ? "hours" : "hour"}  ${remainingMinutes >0? remainingMinutes : "" } ${remainingMinutes>0 ? "minutes":""} ` }  </div>  
+      </div>
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{movie.title}</h2>
-        <p>Click the button to listen on Spotiwhy app.</p>
-        <div className="card-actions justify-end">
+      <div className="card-body font-winky">
+        <h2 className="card-title text-xl">{title}</h2>
+        <div className="card-actions justify-start mt-4">
+        <div className="">  {genre[0]}</div> 
+      </div>
+     
+
+          
+      <div className="card-actions justify-start mt-2 border-t-1 border-gray-200 pt-4 flex items-center" >
+        <img className="w-6 h-6" src="https://img.icons8.com/?size=100&id=nkGDoqzPxYM3&format=png&color=000000" alt="" />
+        <div>{releaseYear}</div> 
+      </div>
+      <div className="hidden lg:flex card-actions justify-start mt-2 border-t-1 border-gray-200 pt-4  items-center" >
+      <img className="w-6 h-6" src="https://img.icons8.com/?size=100&id=LoSoc46PxwP6&format=png&color=000000" alt="" />
+      <div className="font-winky">{`${durationInHours} ${durationInHours >1 ? "hours" : "hour"}  ${remainingMinutes >0? remainingMinutes : "" } ${remainingMinutes>0 ? "minutes":""} ` }  </div>  
+      </div>
+     
+      <div className="card-actions justify-start mt-2 border-t-1 border-gray-200 pt-4 flex items-center" >
+        <img className="w-6 h-6" src="https://img.icons8.com/?size=100&id=19295&format=png&color=000000" alt="" />
+        <div className="">{rating}</div>    
+      </div>
+      <div className="card-actions justify-start mt-2 border-t-1 border-gray-200 pt-4 flex items-center" >
+        
+        <div className="">{summary}</div>    
+      </div>
+
+        
+      
+
+
+      {/* buttons */}
+      <div className="card-actions flex flex-col md:flex-row justify-center  items-start gap-4 pt-4 md:justify-end ">
           <button
-            className="btn btn-primary"
+            className="btn  border-b-2 border-yellow-300   rounded-2xl border-0   hover:text-blue-100 text-lg text-gray-900 hover:bg-gray-800 shadow-none hover:border-0"
             onClick={() => handleDelete(movie._id)}
           >
             Delete Movie
           </button>
           <button
-            className="btn btn-primary"
+            className="btn   border-b-2 border-yellow-300  rounded-2xl border-0   hover:text-blue-100 text-lg text-gray-900 hover:bg-gray-800 shadow-none hover:border-0"
             onClick={() => {
               handleFavorite(fMovie, user);
             }}
           >
             Add to Favorite
           </button>
-         <NavLink to={`/update/${movie._id}`} className="btn" >Update</NavLink>
+         <NavLink to={`/update/${movie._id}`} className="btn  bg-transparent   rounded-2xl border-0 border-b-2 border-yellow-300  hover:text-blue-100 text-lg text-gray-900 hover:bg-gray-800 shadow-none hover:border-0" >Update</NavLink>
         </div>
       </div>
     </div>

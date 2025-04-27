@@ -38,7 +38,7 @@ const Update = () => {
     };
 console.log(updateMovie);
  
-    fetch(`http://localhost:5000/update/${loadedData._id}`, {
+    fetch(`https://movie-box-server.vercel.app/update/${loadedData._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -156,7 +156,7 @@ console.log(updateMovie);
         ></textarea>
         {errors.summary && <p className="text-red-500 text-sm">Summary must be at least 10 characters</p>}
 
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className="btn  bg-transparent   rounded-2xl border-0 border-b-2 border-yellow-300  hover:text-blue-100 text-lg text-gray-900 hover:bg-gray-800 shadow-none hover:border-0 w-full">
           Update Movie
         </button>
       </form>

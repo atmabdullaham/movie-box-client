@@ -10,6 +10,7 @@ import SignIn from "../pages/SignIn";
 import PrivateRoute from "./PrivateRoute";
 import Error from "../pages/Error";
 import Update from "../pages/Update";
+import News from "../pages/News";
 
 const routes = createBrowserRouter([
   {
@@ -20,12 +21,12 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/movie"),
+        loader: () => fetch("https://movie-box-server.vercel.app/movie"),
       },
       {
         path: "/all-movies",
         element: <AllMovie></AllMovie>,
-        loader: () => fetch("http://localhost:5000/movie"),
+        loader: () => fetch("https://movie-box-server.vercel.app/movie"),
       },
       {
         path: "/movie/:id",
@@ -35,7 +36,7 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/movie/${params.id}`),
+          fetch(`https://movie-box-server.vercel.app/movie/${params.id}`),
       },
       {
         path: "/add-movie",
@@ -53,7 +54,7 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/favorite/${params.email}`),
+          fetch(`https://movie-box-server.vercel.app/favorite/${params.email}`),
       },
       {
         path: "/SignUp",
@@ -67,8 +68,12 @@ const routes = createBrowserRouter([
         path:"/update/:id",
         element:<Update></Update>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/update/${params.id}`),
-      }
+          fetch(`https://movie-box-server.vercel.app/update/${params.id}`),
+      },
+{
+  path: "/news",
+  element: <News></News>
+}
     ],
   },
 ]);
