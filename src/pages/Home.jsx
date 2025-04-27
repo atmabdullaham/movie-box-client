@@ -4,19 +4,31 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import ClassicMovies from "../components/ClassicMovies";
 import AwardWinningFilms from "../components/AwardWinningFilms";
+import Loading from "./Loading";
+
 
 
 const Home = () => {
   const moviesData = useLoaderData();
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (moviesData) {
       const sortedMovies = [...moviesData].sort((a, b) => b.rating - a.rating);
       setMovies(sortedMovies);
+      setLoading(false);
     }
   }, [moviesData]);
   
+ 
+  if (loading) {
+    
+  return (
+    <Loading></Loading>
+    
+  );
+ }
 
   return (
     <div className="mt-20">

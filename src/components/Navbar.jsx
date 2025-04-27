@@ -6,15 +6,15 @@ import { AuthContext } from "../provider/AuthProvider";
 const Navbar = () => {
   const { user, handleLogout } = useContext(AuthContext);
   const email = user?.email;
-  console.log(user);
+  // console.log(user);
   const [hidden, setHidden] = useState(true);
 
   const handleMouseEnter = () => {
-    setHidden(false); // show name, hide image
+    setHidden(false); 
   };
 
   const handleMouseLeave = () => {
-    setHidden(true); // show image, hide name
+    setHidden(true); 
   };
  
 

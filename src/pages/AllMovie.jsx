@@ -1,17 +1,24 @@
 import { useLoaderData } from "react-router-dom";
 import Card from "../components/Card";
 import {  useEffect, useState } from "react";
+import Loading from "./Loading";
 
 const AllMovie = () => {
   const data = useLoaderData();
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState(data);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`https://movie-box-server.vercel.app/movie?searchParams=${search}`)
       .then((res) => res.json())
       .then((data) => 
         setMovies(data));
+      setLoading(false);
   }, [search]);
+
+  if (loading) {
+    return <Loading></Loading>
+  }
   return (
     
     <div className="mt-20">

@@ -14,11 +14,11 @@ const MovieDetails = () => {
   const remainingMinutes = duration % 60;
     
 
-  console.log(movie);
+  // console.log(movie);
   const handleFavorite = (fMovie, user) => {
     const email = user.user.email;
     const fMovieWithEmail = { ...fMovie, email };
-    console.log(fMovieWithEmail);
+    // console.log(fMovieWithEmail);
     //
     fetch("https://movie-box-server.vercel.app/favorite", {
       method: "POST",
@@ -29,7 +29,7 @@ const MovieDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Movie successfully added",
@@ -49,13 +49,13 @@ const MovieDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("delete confirm", id);
+        // console.log("delete confirm", id);
         fetch(`https://movie-box-server.vercel.app/movie/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",

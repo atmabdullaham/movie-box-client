@@ -1,7 +1,8 @@
-import { use, useContext, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import Loading from "./Loading";
 
 const FavoriteMovies = () => {
   const navigate = useNavigate();
@@ -9,8 +10,17 @@ const FavoriteMovies = () => {
   const [favoriteMovies, setFavoriteMovies] = useState(myFavoriteMovie)
   const user = useContext(AuthContext);
   const email = user.user.email;
-  console.log(user.user.email);
-  console.log(myFavoriteMovie);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    if (myFavoriteMovie) {
+      setLoading(false);
+    }
+  }, [myFavoriteMovie]);
+
+
+
   const handleDelete = (id) => {
       Swal.fire({
         title: "Are you sure?",
@@ -22,13 +32,13 @@ const FavoriteMovies = () => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log("delete confirm", id);
+          // console.log("delete confirm", id);
           fetch(`https://movie-box-server.vercel.app/favorite/${email}/${id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              // console.log(data);
               if (data.deletedCount > 0) {
                 Swal.fire({
                   title: "Deleted!",
@@ -45,6 +55,10 @@ const FavoriteMovies = () => {
         }
       });
     };
+
+  if (loading) {
+    return<Loading></Loading>
+  }
   return <div><h2 className="text-3xl text-center font-bold mb-5">My Favorite Movies</h2>
   <div className="text-white mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     

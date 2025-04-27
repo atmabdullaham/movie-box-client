@@ -36,7 +36,7 @@ const Update = () => {
       genre: [data.genre],
       rating,
     };
-console.log(updateMovie);
+// console.log(updateMovie);
  
     fetch(`https://movie-box-server.vercel.app/update/${loadedData._id}`, {
       method: "PUT",
@@ -47,7 +47,7 @@ console.log(updateMovie);
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Movie successfully updated",

@@ -6,7 +6,7 @@ import { useState } from "react";
 const AddMovie = () => {
   const [rating, setRating] = useState(0);
   const handleRating = (rate) => {
-    console.log(rate);
+
     setRating(rate);
   };
   const handleAddMovie = (event) => {
@@ -49,7 +49,7 @@ const AddMovie = () => {
       rating,
       summary,
     };
-    console.log(newMovie);
+ 
 
     fetch("https://movie-box-server.vercel.app/movie", {
       method: "POST",
@@ -60,7 +60,7 @@ const AddMovie = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Movie successfully added",

@@ -31,14 +31,14 @@ const SignUp = () => {
     handleRegister(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        // console.log(user);
         navigate("/");
         manageProfile(name, photo);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        // console.log(errorCode, errorMessage);
         // ..
       });
   };

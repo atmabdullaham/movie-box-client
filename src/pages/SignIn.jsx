@@ -7,7 +7,7 @@ const SignIn = () => {
   const { handleLogin, handleGoogleLogin, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ const SignIn = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        // console.log(errorCode, errorMessage);
       });
   };
   const googleLoginHandler = () => {
